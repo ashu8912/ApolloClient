@@ -4,17 +4,18 @@ import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 import './App.css';
 import Dog from './components/Dog/Dog';
-
+import DogPhoto from './components/DogPhoto/DogPhoto';
 
 //https://48p1r2roz4.sse.codesandbox.io
 const client=new ApolloClient({
-  uri:"https://nx9zvp49q7.lp.gql.zone/graphql"
+  uri:"https://dog-graphql-api.glitch.me/"
 })
 class App extends Component {
   state={
     breed:''
   }
-  dogChangeHandler(event){
+  dogChangeHandler=(event)=>{
+    console.log(event.target.value);
     this.setState({breed:event.target.value});
   }
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
       <ApolloProvider client={client}>
       <div className="App">
        <Dog onDogChange={this.dogChangeHandler}/>
+       <DogPhoto breed={this.state.breed}/>
       </div>
       </ApolloProvider>
     );

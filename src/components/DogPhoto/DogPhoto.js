@@ -11,12 +11,15 @@ const GET_DOG_PHOTO = gql`
   }
 `;
 const DogPhoto=({breed})=>(
+    breed?
     <Query query={GET_DOG_PHOTO} variables={{breed}}>
     {({loading,error,data})=>{
         if(loading) return <p>loading...</p>
-        if(error) return null
+        if(error) return <p>error</p>;
+        console.log(data);
         return <img src={data.dog.displayImage} 
-        alt="dog" style={{ height: 100, width: 100 }}/>
+        alt="dog"/>
     }}
-    </Query>
+    </Query>:<p>Select a breed</p>
 )
+export default DogPhoto;
